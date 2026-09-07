@@ -1,13 +1,15 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        eye = set()
-        l = 0
-        length = 0  
-        for r in range(len(s)):
-            while s[r] in eye:
-                eye.remove(s[l])
-                l += 1
-            eye.add(s[r])
-            length = max(length, r - l + 1)
+        char_map = {}  # Tracks { character: most_recent_index }
+        left = 0
+        res = 0
+        
+        for right, char in enumerate(s):
+            # If the character is in our current window, jump 'left' past it
+            if char in char_map and char_map[char] >= left:
+                left = char_map[char] + 1
             
-        return length
+            char_map[char] = right
+            res = max(res, right - left + 1)
+            
+        return res
