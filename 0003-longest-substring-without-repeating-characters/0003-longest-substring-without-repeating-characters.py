@@ -2,7 +2,7 @@ class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         eye = set()
         l = 0
-        length = 0  # Fixed typo from 'lenth' to avoid NameError
+        length = 0  
         for r in range(len(s)):
             while s[r] in eye:
                 eye.remove(s[l])
